@@ -2,8 +2,9 @@
   "name": "DWSR-2026-B",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "DEBUG=dwssr-2026b:* node ./server/bin/www",
+    "start": "DEBUG=DWSR-2026-B:* node ./server/bin/www",
     "greet": "echo 'Hola Mundo'"
   },
   "dependencies": {
