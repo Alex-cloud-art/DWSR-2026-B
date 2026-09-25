@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url'
 import { dirname } from 'node:path'
 
 // Creacion del objeto Debug
-const debug = createDebug('dwssr-2026b:server')// 👈
+const debug = createDebug('DWSR-2026-B:server')// 👈
 // Creando la variables
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
