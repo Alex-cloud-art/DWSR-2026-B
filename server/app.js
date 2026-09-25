@@ -1,24 +1,33 @@
 // Funcion para manejar errores en la aplicacion
-// ❌ var createError = require('http-errors');
 import createError from 'http-errors'
 // Importar el framework express
-// ❌ var express = require('express');
 import express from 'express'
 // Importa modulos para manejar rutas
-// ❌ var path = require('path');
 import path from 'node:path'
 // Importa modulos para manejar cookies
-// ❌ var cookieParser = require('cookie-parser');
 import cookieParser from 'cookie-parser'
 // Importa modulos para manejar logs
-// ❌ var logger = require('morgan');
 import logger from 'morgan'
+// Importando biblioteca de debug
+import createDebug from "debug" // 👈
+// Imports para crear Dirname
+import { fileURLToPath } from 'node:url'
+import { dirname } from 'node:path'
+
+// Creacion del objeto Debug
+const debug = createDebug('dwssr-2026b:server')// 👈
+// Creando la variables
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 // Importar las rutas de la aplicacion
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+//var indexRouter = require('./routes/index');
+import indexRouter from './routes/index.js'
+//var usersRouter = require('./routes/users');
+import usersRouter from './routes/users.js'
 
 // Crear la aplicacion express
+debug("🔨 Creando backend")
 var app = express();
 
 // Configurar el motor de vistas
@@ -32,9 +41,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Configurar la carpeta de archivos estaticos
+debug("🔨 Creando servidor de Archivos Estáticos")
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Registramos las rutas de la aplicacion
+debug("🛣️ Registrando rutas")
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -54,4 +65,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+// module.exports = app;
+export default app;
