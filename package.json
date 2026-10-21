@@ -1,11 +1,11 @@
 {
-  "name": "dwssr-2026b",
+  "name": "DWSR-2026-B",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "start": "NODE_ENV=production node ./server/bin/www.js",
-    "dev": "DEBUG=dwssr-2026b:* nodemon ./server/bin/www.js",
+    "dev": "DEBUG=DWSR-2026-B:* nodemon ./server/bin/www.js",
     "dev:vite": "vite --host",
     "dev:all": "concurrently \"npm run dev\" \"npm run dev:vite\"",
     "build": "vite build",
