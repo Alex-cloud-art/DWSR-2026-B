@@ -1,19 +1,20 @@
-import express from 'express'
-const router = express.Router();
+import express from 'express';
+
+const indexRouter = express.Router();
 
 let counter = 0;
-const numbers = []
+const numbers = [];
 
 /* GET home page. */
-router.get('/', function(req, res, _next) {
-  counter++;
+indexRouter.get('/', (req, res, _next) => {
+  counter += 1;
   numbers.push(counter);
-  res.render('index', { 
-    title: ' Roberto Alexis',
+  res.render('index', {
+    title: 'Roberto Alexis',
     counter,
-    numbers
+    numbers,
   });
 });
 
-// module.exports = router;
-export default router;
+// module.exports = indexRouter;
+export default indexRouter;

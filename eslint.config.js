@@ -1,8 +1,8 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import js from "@eslint/js";
-import globals from "globals";
-import { plugins, rules } from "eslint-config-airbnb-extended";
-import prettier from "eslint-config-prettier/flat";
+import { defineConfig, globalIgnores } from 'eslint/config';
+import js from '@eslint/js';
+import globals from 'globals';
+import { plugins, rules } from 'eslint-config-airbnb-extended';
+import prettier from 'eslint-config-prettier/flat';
 
 const { base } = rules;
 
@@ -19,48 +19,54 @@ const airbnbBase = [
 
 export default defineConfig([
   globalIgnores([
-    "dist/**",
-    "node_modules/**",
-    ".devcontainer/**",
-    ".vscode/**",
-    ".github/**",
-    "*.config.js",
-    "README.md",
+    'dist/**',
+    'node_modules/**',
+    '.devcontainer/**',
+    '.vscode/**',
+    '.github/**',
+    '*.config.js',
+    'README.md',
   ]),
   {
-    files: ["**/*.{js,mjs}"],
+    files: ['**/*.{js,mjs}'],
     plugins: { js, ...plugins.importX.plugins },
-    extends: ["js/recommended"],
+    extends: ['js/recommended'],
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
+      ecmaVersion: 'latest',
+      sourceType: 'module',
     },
     settings: {
-      "import-x/resolver-next": [
-        plugins.importX.plugins["import-x"].createNodeResolver(),
+      'import-x/resolver-next': [
+        plugins.importX.plugins['import-x'].createNodeResolver(),
       ],
     },
   },
   ...airbnbBase,
   // Back-end, configuración de Vite
   {
-    files: ["server/**/*.{js,mjs}"],
+    files: ['server/**/*.{js,mjs}'],
     languageOptions: { globals: { ...globals.node } },
   },
   // Front-end
   {
-    files: ["src/**/*.{js,mjs}", "public/**/*.{js,mjs}"],
+    files: ['src/**/*.{js,mjs}', 'public/**/*.{js,mjs}'],
     languageOptions: { globals: { ...globals.browser } },
   },
   {
     rules: {
-      "no-underscore-dangle": ["error", { allow: ["__filename", "__dirname"] }],
-      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      'no-underscore-dangle': ['error', { allow: ['__filename', '__dirname'] }],
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       // Los alias "#server/*" y devDependencies de configuración
       // ESM en Node exige la extensión .js en imports relativos
-      "import-x/extensions": ["error", "ignorePackages"],
-      "import-x/no-unresolved": ["error", { ignore: ["^#"] }],
-      "import-x/no-extraneous-dependencies": ["error", { devDependencies: [] }],
+      'import-x/extensions': ['error', 'ignorePackages'],
+      'import-x/no-unresolved': ['error', { ignore: ['^#'] }],
+      'import-x/no-extraneous-dependencies': ['error', { devDependencies: [] }],
+    },
+  },
+  {
+    files: ['src/**/*.{js,mjs}'],
+    rules: {
+      'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
     },
   },
   // Siempre al final: desactiva reglas que chocan con Prettier
