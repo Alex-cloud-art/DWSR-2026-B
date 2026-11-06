@@ -2,10 +2,8 @@
 
 <p>Welcome to {{title}}</p>
 
-<p>Counter {{counter}}</p>
+<p>Counter <span id="counter">0</span></p>
 
-<button class="bg-teal-500 text-white mt-3 px-4 py-2 rounded">Click me</button>
+<button id="increment-counter" type="button" class="bg-teal-500 text-white mt-3 px-4 py-2 rounded">Click me</button>
 
-{{#each numbers}}
-<p>Te mando un 💋</p>
-{{/each}}
+<div id="kisses"></div>
