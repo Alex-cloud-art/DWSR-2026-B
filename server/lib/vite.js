@@ -21,7 +21,11 @@ export function viteAssets() {
   // Obtener modo de ejecución
   const isDev = process.env.NODE_ENV !== 'production';
   // Rescatando la URL del servidor de desarrollo
-  const viteDevServer = process.env.VITE_DEV_SERVER || 'http://localhost:5173';
+  const codespaceName = process.env.CODESPACE_NAME;
+  const defaultViteDevServer = codespaceName
+    ? `https://${codespaceName}-5173.app.github.dev`
+    : 'http://localhost:5173';
+  const viteDevServer = process.env.VITE_DEV_SERVER || defaultViteDevServer;
 
   // Si estamos en modo desarrollo
   if (isDev) {
@@ -29,8 +33,8 @@ export function viteAssets() {
     // del front-end directamente del servidor
     // de Desarorllo de Vite
     return `
-        <script type="module" src="${viteDevServer}/@vite/client"></script>
-        <script type="module" src="${viteDevServer}/main.js"></script>
+        <script type="module" crossorigin="use-credentials" src="${viteDevServer}/@vite/client"></script>
+        <script type="module" crossorigin="use-credentials" src="${viteDevServer}/main.js"></script>
         `;
   }
   // En produccion leemos el manifest

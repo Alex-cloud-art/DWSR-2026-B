@@ -11,6 +11,10 @@ import { fileURLToPath } from "node:url";
 // Creando la variables de rutas
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const codespaceName = process.env.CODESPACE_NAME;
+const devServerOrigin = codespaceName
+  ? `https://${codespaceName}-3000.app.github.dev`
+  : 'http://localhost:3000';
 
 export default defineConfig({
   // Directorio Raiz de los archivos fuente del front-end
@@ -21,6 +25,12 @@ export default defineConfig({
   server: {
     // Puerto de escucha
     port: 5173,
+    // Permitir solicitudes desde puertos reenviados de GitHub Codespaces
+    allowedHosts: ['.app.github.dev'],
+    cors: {
+      origin: devServerOrigin,
+      credentials: true,
+    },
     // Rigidez del puerto
     strict: true,
   },
